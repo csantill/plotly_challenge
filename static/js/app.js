@@ -52,7 +52,7 @@ function panelData(metafilterdata){
 function barPlotChart(samplefilterdata){
     var otuid = samplefilterdata.map(v => v.otu_ids)[0].slice(0, 10).map(i => 'OTU ' + i);;
     var sample_value = samplefilterdata.map(v => v.sample_values)[0].slice(0, 10)
-    var otu_label = samplefilterdata.map(v => v.otu_labels)[0][0].split(";").slice(0, 10);;
+    var otu_label = samplefilterdata.map(v => v.otu_labels)[0].slice(0, 10)
     var trace = {
       x: sample_value,
       y: otuid,
