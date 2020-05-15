@@ -3,7 +3,7 @@
 // console.log("/static/js/data/samples.json")
 var data;
 async function init() {
-    data = await d3.json("/static/data/samples.json");
+    data = await d3.json("static/data/samples.json");
     var selectValues = data.names;
     var selectOpt = d3.select("#selDataset");
     selectValues.forEach(value => {
