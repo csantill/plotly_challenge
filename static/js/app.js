@@ -4,8 +4,8 @@
 var data;
 async function init() {
     data = await d3.json("static/data/samples.json");
-    var selectValues = data.names;
-    var selectOpt = d3.select("#selDataset");
+    let selectValues = data.names;
+    let selectOpt = d3.select("#selDataset");
     selectValues.forEach(value => {
         selectOpt
         .append("option")
@@ -19,13 +19,13 @@ async function init() {
 
 
 function plotFunctions() {
-    var valueSelect = d3.select("#selDataset").node().value;
-    filterData(valueSelect);
+  let valueSelect = d3.select("#selDataset").node().value;
+  filterData(valueSelect);
 }
 
 function filterData(valueSelect){
-  var metafilterdata = data.metadata.filter(value => value.id == valueSelect);
-  var samplefilterdata = data.samples.filter(value => value.id == valueSelect);
+  let metafilterdata = data.metadata.filter(value => value.id == valueSelect);
+  let samplefilterdata = data.samples.filter(value => value.id == valueSelect);
   plotData(metafilterdata,samplefilterdata);
 }
 
@@ -37,42 +37,42 @@ function  plotData(metafilterdata,samplefilterdata){
   }
 
 function panelData(metafilterdata){
-    var divValue = d3.select(".panel-body");
-    divValue.html("");
-    divValue.append("p").text(`id: ${metafilterdata[0].id}`);
-    divValue.append("p").text(`ethnicity: ${metafilterdata[0].ethnicity}`);
-    divValue.append("p").text(`gender: ${metafilterdata[0].gender}`);
-    divValue.append("p").text(`age: ${metafilterdata[0].age}`);
-    divValue.append("p").text(`location: ${metafilterdata[0].location}`);
-    divValue.append("p").text(`bbtype: ${metafilterdata[0].bbtype}`);
-    divValue.append("p").text(`wfreq: ${metafilterdata[0].wfreq}`);
-  }
+  let divValue = d3.select(".panel-body");
+  divValue.html("");
+  divValue.append("p").text(`id: ${metafilterdata[0].id}`);
+  divValue.append("p").text(`ethnicity: ${metafilterdata[0].ethnicity}`);
+  divValue.append("p").text(`gender: ${metafilterdata[0].gender}`);
+  divValue.append("p").text(`age: ${metafilterdata[0].age}`);
+  divValue.append("p").text(`location: ${metafilterdata[0].location}`);
+  divValue.append("p").text(`bbtype: ${metafilterdata[0].bbtype}`);
+  divValue.append("p").text(`wfreq: ${metafilterdata[0].wfreq}`);
+}
 
 
 function barPlotChart(samplefilterdata){
-    var otuid = samplefilterdata.map(v => v.otu_ids)[0].slice(0, 10).map(i => 'OTU ' + i);;
-    var sample_value = samplefilterdata.map(v => v.sample_values)[0].slice(0, 10)
-    var otu_label = samplefilterdata.map(v => v.otu_labels)[0].slice(0, 10)
-    var trace = {
+    let otuid = samplefilterdata.map(v => v.otu_ids)[0].slice(0, 10).map(i => 'OTU ' + i);;
+    let sample_value = samplefilterdata.map(v => v.sample_values)[0].slice(0, 10)
+    let otu_label = samplefilterdata.map(v => v.otu_labels)[0].slice(0, 10)
+    let trace = {
       x: sample_value,
       y: otuid,
       text: otu_label,
       type: "bar",
       orientation: "h"
     };
-    var layout = {
+    let layout = {
       yaxis: {
         autorange: "reversed"
       }
     };
-    var bardata = [trace];
+    let bardata = [trace];
     Plotly.newPlot("bar", bardata, layout);
   }  
 
 // Bonus
 function gaugeChart(metafilterdata) {
-  var weeklyFreq = metafilterdata[0].wfreq;
-  var trace = {
+  let weeklyFreq = metafilterdata[0].wfreq;
+  let trace = {
     domain: { x: [0, 1], y: [0, 1] },
     title: {
       text: "<b>Belly Button Washing Frequency</b><br>Scrubs per Week"
@@ -104,17 +104,17 @@ function gaugeChart(metafilterdata) {
       }
     }
   }
-  var data=[trace];
-  var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+  let data=[trace];
+  let layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
   Plotly.newPlot("gauge", data, layout);
 }
 
 function bubbleChart(samplefilterdata) {
-  var otuid = samplefilterdata.map(v => v.otu_ids)[0];
-  var sample_value = samplefilterdata.map(v => v.sample_values)[0];
-  var otu_label = samplefilterdata.map(v => v.otu_labels)[0]
+  let otuid = samplefilterdata.map(v => v.otu_ids)[0];
+  let sample_value = samplefilterdata.map(v => v.sample_values)[0];
+  let otu_label = samplefilterdata.map(v => v.otu_labels)[0]
     
-  var trace = {
+  let trace = {
     x: otuid,
     y: sample_value,
     mode: "markers",
@@ -124,9 +124,9 @@ function bubbleChart(samplefilterdata) {
     },
     text: otu_label
   };
-  var data = [trace];
+  let data = [trace];
 
-  var layout = {
+  let layout = {
     showlegend: false,
     xaxis: { title: "OTU ID" }
   };
