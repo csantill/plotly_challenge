@@ -18,10 +18,10 @@ async function init() {
 };
 
 
-function plotFunctions() {
+var plotFunctions = function () {
   let valueSelect = d3.select("#selDataset").node().value;
   filterData(valueSelect);
-}
+};
 
 function filterData(valueSelect){
   let metafilterdata = data.metadata.filter(value => value.id == valueSelect);
@@ -34,7 +34,7 @@ function  plotData(metafilterdata,samplefilterdata){
     barPlotChart(samplefilterdata);
     gaugeChart(metafilterdata);
     bubbleChart(samplefilterdata);
-  }
+}
 
 function panelData(metafilterdata){
   let divValue = d3.select(".panel-body");
